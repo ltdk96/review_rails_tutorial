@@ -28,7 +28,7 @@ REDO THE TWITTER CLONE
 	* named routes
 
 
-3. THINGs that MAKE SENSE:
+3. THINGs that MAKE SENSE (but I won't spend time doing it):
 
 	a. TDD with RSpec:
 	* models, requests & helpers
