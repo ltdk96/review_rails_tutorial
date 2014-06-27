@@ -1,6 +1,9 @@
 ReviewApp::Application.routes.draw do
-  
+  resources :users, only: [:new, :create, :show]
+
   root to: 'static_pages#home'
+
+  match '/signup', to: 'users#new', via: 'get'
 
   match '/help', to:  'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
