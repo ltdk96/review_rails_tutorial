@@ -1,0 +1,7 @@
+<li>
+  <%= gravatar_for user, size: 52 %>
+  <%= link_to user.name, user_path(user) %>
+  <% if current_user.admin && !current_user?(user) %>
+    | <%= delete_link user_path(user), message: 'Are you sure?' %>
+  <% end %>
+</li>

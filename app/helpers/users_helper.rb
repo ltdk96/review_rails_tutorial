@@ -8,4 +8,8 @@ module UsersHelper
 	image_tag(gravatar_url, alt: user.name)
   end
 
+  def right_password?(user, password)  	
+  	user.authenticate(password)
+  end
+
 end
