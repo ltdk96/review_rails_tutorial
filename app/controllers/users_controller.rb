@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def new
-  	@user = User.new            
+  	@user = User.new
   end
 
   def create
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tweets = @user.feed.paginate(page: params[:page], per_page: 10)
   end
 
   def edit

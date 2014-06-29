@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  
+
   #callbacks
   before_create :create_remember_token
   before_save { email.downcase! }
@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, length: { minimum: 6 }
+
+  #associations
+  has_many :tweets, dependent: :destroy
   
   #remember tokens
   def User.new_remember_token
@@ -20,6 +23,11 @@ class User < ActiveRecord::Base
 
   def User.digest token
   	Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  #Tweets feed
+  def feed
+    Tweet.where('user_id = ?', self.id)
   end
 
   private

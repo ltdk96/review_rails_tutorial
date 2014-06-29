@@ -1,7 +1,28 @@
-<div class='center hero-unit'>
-  <h1>Welcome to Twister</h1>
-
-  <h2>Cloning Twitter to learn Rails</h2>
-
-  <%= link_to 'Sign up now!', signup_path, class: 'btn btn-primary btn-large' %>
-</div>
+<% if signed_in? %>
+  <div class='row'>
+  	<aside class='span4'>
+  	  <section>
+  	  	<%= render 'shared/user_info' %>
+  	  </section>
+  	  <section>
+  	  	<%= render 'shared/tweet_form' %>
+  	  </section>
+  	</aside>
+  	<div class='span8'>
+  	  <% if current_user.feed.any? %>
+  	    <h3>All tweets (<%= current_user.feed.count %>)</h3>
+  	    <%= render 'shared/feed' %>
+  	  <% else %>
+  	    <h3>Wow, you're invisible!</h3>
+  	  <% end %>
+  	</div>
+  </div>
+<% else %>
+  <div class='center hero-unit'>
+    <h1>Welcome to Twister</h1>
+  
+    <h2>Cloning Twitter to learn Rails.</h2>
+  
+    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-primary btn-large' %>
+  </div>
+<% end %>

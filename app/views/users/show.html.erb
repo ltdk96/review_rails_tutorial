@@ -8,4 +8,15 @@
   	  </h1>
   	</section>
   </aside>
+  <div class='span8'>
+  	<% if @user.tweets.any? %>
+	  <h3>Tweeted (<%= @user.tweets.count %>)</h3>
+	  <ol class='tweets'>
+	  	<%= render @tweets %>
+	  </ol>
+	  <%= will_paginate @tweets %>
+	<% else %>
+	  <h3>Opps, no tweets!</h3>
+	<% end %>
+  </div>
 </div>
