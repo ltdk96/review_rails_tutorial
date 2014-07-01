@@ -1,10 +1,4 @@
-<%= link_to gravatar_for(current_user, size: 52), user_path(current_user) %>
-<h1>
-  <%= current_user.name %>
-</h1>
-<span>
-  <%= link_to "view my profile", current_user %>
-</span>
-<span>
-  <%= pluralize(current_user.tweets.count, "tweet") %>
-</span>
+<%= link_to gravatar_for(object, size: 52), user_path(object) %>
+<h1><%= object.name %></h1>
+<span><%= link_to "view my profile", user_path(object) %></span>
+<span><%= pluralize(object.tweets.count, "tweet") %></span>

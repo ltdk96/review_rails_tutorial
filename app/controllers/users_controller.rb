@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   include UsersHelper
   
-  before_action :signed_in, only: [:index, :edit, :update, :destroy]
+  before_action :signed_in, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_only, only: [:destroy]
   before_action :not_signed_in, only: [:new, :create]
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tweets = @user.feed.paginate(page: params[:page], per_page: 10)
+    @tweets = @user.tweets.paginate(page: params[:page])
   end
 
   def edit
@@ -56,6 +56,24 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = 'User deleted!'
     redirect_to users_path
+  end
+
+  def following
+    @title = 'Following'
+    @user = User.find(params[:id])
+
+    @all = @user.followed_users
+    @users = @all.paginate(page: params[:page], per_page: 10)
+    render 'show_follow'
+  end
+
+  def followers
+    @title = 'Followers'
+    @user = User.find(params[:id])
+
+    @all = @user.followers
+    @users = @all.paginate(page: params[:page], per_page: 10)
+    render 'show_follow'
   end
 
   private
